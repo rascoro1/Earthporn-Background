@@ -1,7 +1,13 @@
 import os
 import sys
-from subprocess import check_output, CalledProcessError
 import time
+from subprocess import check_output, CalledProcessError
+
+# This Script was make by Rascoro1
+# This script will only work on Mac computers
+# Will pull URLs from restful API that will update every 15 minutes
+
+#@TODO Enable this script for Linux and Windows
 
 
 WEBSITE = ''
@@ -11,6 +17,7 @@ DELAY = 60 # Default is 60 mins
 PICTURE_NUM = 0
 
 def parse_config():
+    """ Parse Config File """
     global PICTURE_NUM
     global DELAY
     global WEBSITE
@@ -43,6 +50,7 @@ def parse_config():
 
 
 def get_pictures():
+    """ Install Pictures into IMG_PATH """
     res = check_output(('curl', WEBSITE, '-s'))
     res = res.split('},')
     for line in res:
@@ -67,6 +75,7 @@ def get_pictures():
     print "Picture Downloads Complete."
 
 def select_picture():
+    """ Select Which Picture, will cycle through pictures in IM_PATH directory """
     pics = os.listdir(IMG_PATH)
     print "PICTURE_NUM:", PICTURE_NUM
     pic = pics[PICTURE_NUM]
@@ -76,6 +85,7 @@ def select_picture():
     return IMG_PATH + pic
 
 def change_desktop():
+    """ This will Change the Mac Desktop """
     pic_path = select_picture()
     print pic_path
     print "New pic_path:", pic_path.replace('\n', '')
@@ -91,6 +101,7 @@ def change_desktop():
         print e.output
 
 def change_picture_number():
+    """ Add one to the PICTURE_NUM in the config.cfg file """
     f = open('config.cfg', 'r')
     in_lines = f.readlines()
     f.close()
@@ -111,6 +122,7 @@ def change_picture_number():
 
 
 if __name__ == "__main__":
+    """ Infinite loop, can be thrown in background """
     while True:
         parse_config()
         get_pictures()
