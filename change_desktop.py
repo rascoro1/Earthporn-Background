@@ -3,9 +3,15 @@ import sys
 import time
 from subprocess import check_output, CalledProcessError
 
-# This Script was make by Rascoro1
+# This Script was make by Rascoro1 4/11/2016
 # This script will only work on Mac computers
-# Will pull URLs from restful API that will update every 15 minutes
+
+# Pull URLs from restful API that will update every 15 minutes
+# Download images found from reddit.com/r/earthporn
+# Cycle through images updating the Desktop Background
+
+# User can decide where to download the images
+# User can decide the frequency of background upgrade
 
 #@TODO Enable this script for Linux and Windows
 
